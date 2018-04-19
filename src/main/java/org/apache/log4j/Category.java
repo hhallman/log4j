@@ -364,6 +364,9 @@ public class Category implements AppenderAttachable {
     print a stack trace use the {@link #fatal(Object, Throwable)} form
     instead.
 
+    <p>After logging the message to the appenders, the current process
+    will exit with code 1.
+
     @param message the message object to log */
   public
   void fatal(Object message) {
@@ -372,6 +375,7 @@ public class Category implements AppenderAttachable {
     }
     if(Level.FATAL.isGreaterOrEqual(this.getEffectiveLevel())) {
         forcedLog(FQCN, Level.FATAL, message, null);
+        System.exit(1);
     }
   }
 
